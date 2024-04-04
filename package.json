@@ -21,6 +21,7 @@
     "@trpc/next": "11.0.0-next-beta.318",
     "@trpc/react-query": "11.0.0-next-beta.318",
     "@trpc/server": "11.0.0-next-beta.318",
+    "framer-motion": "^11.0.24",
     "next": "^14.1.4",
     "next-auth": "^4.24.7",
     "react": "18.2.0",

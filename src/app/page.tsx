@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
 import { FaChevronCircleDown } from "react-icons/fa";
+import Point from "./_components/Points";
 
 export default function Home() {
   return (
@@ -17,10 +17,7 @@ export default function Home() {
           <FaChevronCircleDown />
         </Link>
       </ScrollableComponent>
-      <ScrollableComponent
-        id="1"
-        className="items-center justify-center gap-10 text-center"
-      >
+      <ScrollableComponent id="1" className="gap-10 text-center">
         <h1 className="mb-3 text-2xl font-bold">ABOUT</h1>
         <Image
           alt="about image"
@@ -43,6 +40,17 @@ export default function Home() {
           explicabo?
         </p>
       </ScrollableComponent>
+      <ScrollableComponent>
+        <ul>
+          {[...Array(5)].map((e, i) => (
+            <Point key={i}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum
+              odit magni possimus eum expedita natus consectetur. Provident
+              consequuntur enim quos?
+            </Point>
+          ))}
+        </ul>
+      </ScrollableComponent>
     </main>
   );
 }
@@ -61,7 +69,7 @@ const ScrollableComponent = ({
   return (
     <section
       id={id}
-      className={`flex h-full snap-center flex-col ${className}`}
+      className={`flex h-full snap-center flex-col items-center justify-center ${className}`}
     >
       {children}
     </section>
