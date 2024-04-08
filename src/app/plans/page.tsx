@@ -21,4 +21,5 @@ const Plans = () => {
     </main>
   );
 };
+
 export default Plans;
