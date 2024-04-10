@@ -1,18 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaChevronCircleDown } from "react-icons/fa";
-import Point from "./_components/Points";
+import Point from "./Points";
 
 export default function Home() {
   return (
     <main className="z-0 h-[92vh] snap-y snap-mandatory overflow-y-scroll scroll-smooth px-10">
-      <ScrollableComponent className="relative items-center justify-center">
+      <ScrollableComponent className="relative items-center justify-center space-y-2">
+        <Image
+          src="/logo.jpg"
+          width={200}
+          height={200}
+          alt="logo"
+          className="rounded-full"
+        />
         <p className="text-center text-2xl font-bold">
           This is my motto which I will follow no matter what
         </p>
         <Link
           href="#1"
-          className="absolute bottom-16 animate-bounce text-3xl text-blue-500"
+          className="absolute bottom-16 animate-bounce text-3xl text-blue-500 "
         >
           <FaChevronCircleDown />
         </Link>
@@ -25,7 +32,7 @@ export default function Home() {
           height={200}
           src="/banner.png"
           className="rounded-full"
-        ></Image>
+        />
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem ipsum
           nam accusantium eius, ut asperiores fugiat necessitatibus maxime
