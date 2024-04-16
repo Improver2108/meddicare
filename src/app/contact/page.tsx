@@ -24,41 +24,40 @@ const Contact = () => {
       <h1 className="flex justify-center p-1 text-2xl font-bold">
         Contact Me!
       </h1>
-      <section className="flex flex-grow items-center justify-center">
+      <section className="space-y- flex flex-grow flex-col items-center justify-center gap-3">
         <h2 className="text-lg font-semibold">
           I have got just what you need.{" "}
-          <span className="underline decoration-orange-500">Let's Talk</span>
+          <span className="underline decoration-blue-400">Let's Talk</span>
         </h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex w-fit flex-col space-y-3"
+          className="flex w-[20rem] flex-col gap-2"
         >
-          <div className="space-x-2">
-            <input
-              placeholder="Name"
-              className="contact-input"
-              type="text"
-              {...register("name")}
-            />
-            <input
-              placeholder="E-mail"
-              className="contact-input"
-              type="email"
-              {...register("email")}
-            />
-          </div>
+          <input
+            placeholder="Name"
+            className="rounded-lg border bg-blue-200 px-2 py-3"
+            type="text"
+            {...register("name")}
+          />
+          <input
+            placeholder="E-mail"
+            className="rounded-lg border bg-blue-200 px-2 py-3"
+            type="email"
+            {...register("email")}
+          />
+
           <input
             placeholder="Subject"
-            className="contact-input"
+            className="rounded-lg border bg-blue-200 px-2 py-3"
             type="text"
             {...register("subject")}
           />
           <textarea
             placeholder="Message"
-            className="contact-input"
+            className="rounded-lg border bg-blue-200 px-2 py-3"
             {...register("message")}
           />
-          <button className="rounded-lg bg-yellow-500 py-5 hover:bg-yellow-700">
+          <button className="rounded-lg bg-blue-400 py-5 hover:bg-blue-500">
             Submit
           </button>
         </form>
