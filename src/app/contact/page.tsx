@@ -27,7 +27,7 @@ const Contact = () => {
       <section className="space-y- flex flex-grow flex-col items-center justify-center gap-3">
         <h2 className="text-lg font-semibold">
           I have got just what you need.{" "}
-          <span className="underline decoration-blue-400">Let's Talk</span>
+          <span className="underline decoration-blue-400">{`Let's Talk`}</span>
         </h2>
         <form
           onSubmit={handleSubmit(onSubmit)}

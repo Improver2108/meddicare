@@ -49,7 +49,7 @@ export default function Home() {
       </ScrollableComponent>
       <ScrollableComponent>
         <ul>
-          {[...Array(5)].map((e, i) => (
+          {[...Array<null>(5)].map((e, i) => (
             <Point key={i}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum
               odit magni possimus eum expedita natus consectetur. Provident
