@@ -28,7 +28,7 @@ const Header = ({ children }: HeaderProp) => {
         </button>
       </section>
       <section
-        className={`overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500  transition-[height] duration-[500] ease-in-out ${navVisible ? "h-[9.5em]" : "h-0"} `}
+        className={`overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500  transition-[height] duration-[500] ease-in-out ${navVisible ? "h-[8em]" : "h-0"} `}
       >
         {children}
       </section>

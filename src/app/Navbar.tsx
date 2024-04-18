@@ -3,7 +3,6 @@ import Link from "next/link";
 const Navbar = () => {
   const pages = [
     ["Home", ""],
-    ["About", "about"],
     ["Diet Plans", "plans"],
     ["Blogs", "blogs"],
     ["Contact Us", "contact"],
