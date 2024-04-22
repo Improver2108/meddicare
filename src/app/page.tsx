@@ -5,7 +5,7 @@ import Point from "./Points";
 
 export default function Home() {
   return (
-    <main className="z-0 h-[93svh] snap-y snap-mandatory overflow-y-scroll scroll-smooth px-10">
+    <main className="z-0 h-[93vh] snap-y snap-mandatory overflow-y-scroll scroll-smooth px-10">
       <ScrollableComponent className="relative items-center justify-center space-y-2">
         <Image
           src="/logo.jpg"
