@@ -19,7 +19,7 @@ export default function Home() {
         </p>
         <Link
           href="#1"
-          className="absolute bottom-16 animate-bounce text-3xl text-blue-500 "
+          className="absolute bottom-16 animate-bounce text-3xl text-[#629ea7]"
         >
           <FaChevronCircleDown />
         </Link>

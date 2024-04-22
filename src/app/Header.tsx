@@ -12,7 +12,7 @@ const Header = ({ children }: HeaderProp) => {
   const [navVisible, isNavVisible] = useState(false);
   return (
     <header className="sticky top-0 z-20">
-      <section className="z-[70] flex h-[3.25em] items-center justify-between bg-gradient-to-r from-cyan-500 to-blue-500 px-3">
+      <section className="z-[70] flex h-[3.25em] items-center justify-between bg-gradient-to-r from-[#9dcfd3] to-[#629ea7] px-3">
         <Link href={"/"}>
           <Image
             src="/logo.jpg"
@@ -28,7 +28,7 @@ const Header = ({ children }: HeaderProp) => {
         </button>
       </section>
       <section
-        className={`overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500  transition-[height] duration-[500] ease-in-out ${navVisible ? "h-[8em]" : "h-0"} `}
+        className={`overflow-hidden bg-gradient-to-r from-[#9dcfd3] to-[#629ea7]  transition-[height] duration-[500] ease-in-out ${navVisible ? "h-[8em]" : "h-0"} `}
       >
         {children}
       </section>
