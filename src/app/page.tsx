@@ -47,7 +47,7 @@ export default function Home() {
           explicabo?
         </p>
       </ScrollableComponent>
-      <ScrollableComponent>
+      <ScrollableComponent className="relative">
         <ul>
           {[...Array<null>(5)].map((e, i) => (
             <Point key={i}>
@@ -57,6 +57,12 @@ export default function Home() {
             </Point>
           ))}
         </ul>
+        <Link
+          href={"/contact"}
+          className="absolute bottom-7 animate-bounce rounded-full bg-gradient-to-r from-[#9dcfd3] to-[#629ea7] p-3"
+        >
+          Book Appointment
+        </Link>
       </ScrollableComponent>
     </main>
   );
