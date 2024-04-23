@@ -1,8 +1,6 @@
 "use client"
 import Link from "next/link";
-import "../blogs/gg.css";
 import { useEffect, useState, useRef } from "react";
-import { types } from "util";
 
 
 const Plans = () => {
@@ -37,9 +35,9 @@ const Plans = () => {
 
 
   return (
-    <main className="flex flex-col items-center gap-10 px-8 py-3">
+    <main className="flex flex-col justify-center items-center gap-10 px-8 py-3 h-[93vh]">
       <h1 className="mt-3 text-2xl font-bold">Blogs</h1>
-      <section className="w-full space-y-2">
+      <section className="w-full flex  ">
         <div className="slideshow">
           <div
             className="slideshowSlider"
@@ -53,7 +51,7 @@ const Plans = () => {
           >
             <Link href={`/blogs/${index}`} key={index}>
               <br/>
-                <h1 className="text-xl font-semibold mx-5">
+                <h1 className="text-xl font-semibold mx-5" style={{whiteSpace:"pre-line"}}>
                   Lorem ipsum dolor sit amet.
                 </h1>
                 <p className="line-clamp-4 text-sm mx-5" style={{whiteSpace:"pre-line"}} >
