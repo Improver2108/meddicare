@@ -8,7 +8,7 @@ import { types } from "util";
 const Plans = () => {
   const arr = [...Array<null>(5)];
   const delay = 2500;
- 
+ const bg=["#0088FE", "#00C49F", "#FFBB28","#0088FE", "#00C49F"]
 
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef<number | null>(null)
@@ -49,14 +49,14 @@ const Plans = () => {
           <div
             key={index}
             className="slide"
-            style={{backgroundColor:"lightblue"}}
+            style={{backgroundColor:bg[index]}}
           >
             <Link href={`/blogs/${index}`} key={index}>
               <br/>
-                <h1 className="text-xl font-semibold">
+                <h1 className="text-xl font-semibold mx-5">
                   Lorem ipsum dolor sit amet.
                 </h1>
-                <p className="line-clamp-4 text-sm " style={{whiteSpace:"pre-line"}} >
+                <p className="line-clamp-4 text-sm mx-5" style={{whiteSpace:"pre-line"}} >
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                   Laborum, eaque. Dolorem fugit eveniet aspernatur unde nesciunt
                   commodi cum quaerat perferendis. Consequatur, quibusdam
