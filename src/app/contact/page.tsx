@@ -6,6 +6,7 @@ type FormInput = {
   email: string;
   subject: string;
   message: string;
+  phone: number;
 };
 
 const Contact = () => {
@@ -16,7 +17,7 @@ const Contact = () => {
   } = useForm<FormInput>();
 
   const onSubmit: SubmitHandler<FormInput> = (data) => {
-    window.location.href = `mailto:ashwathama2108@gmail.com?subject=${data.subject}&body=Hey Yash, my name is ${data.name}. ${data.message} (${data.email})`;
+    window.location.href = `mailto:muskan2208@gmail.com?subject=${data.subject}&body=Hey Muskan, my name is ${data.name}. (${data.message}) (${data.phone})`;
   };
 
   return (
@@ -44,6 +45,12 @@ const Contact = () => {
             className="rounded-lg border bg-[#c8e1e2] px-2 py-3"
             type="email"
             {...register("email")}
+          />
+          <input
+            placeholder="Phone Number"
+            className="rounded-lg border bg-[#c8e1e2] px-2 py-3"
+            type="tel"
+            {...register("phone")}
           />
 
           <input
