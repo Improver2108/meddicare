@@ -1,26 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@layer components
-{
-    .slideshow {
-        @apply overflow-hidden max-w-[500px] mx-auto my-0;
-      }
-      .slideshowSlider {
-        @apply whitespace-nowrap transition-[ease] duration-1000;
-      }
-      .slide {
-        @apply inline-block h-[200px] w-full rounded-[40px];
-      }
-      
-      /* Buttons */
-      .slideshowDots {
-        @apply text-center;
-      }
-      .slideshowDot {
-        @apply inline-block h-5 w-5 cursor-pointer bg-[#c4c4c4] mt-[15px] mb-0 mx-[7px] rounded-[50%];
-      }
-      .slideshowDot.active {
-        @apply bg-[#6a0dad];
-      }
+@layer components {
+  .slideshow {
+    @apply mx-auto my-0 max-w-[30rem] overflow-hidden;
+  }
+  .slideshowSlider {
+    @apply whitespace-nowrap transition duration-1000;
+  }
+  .slide {
+    @apply inline-block h-fit w-full rounded-[40px] px-10 py-20;
+  }
+
+  /* Buttons */
+  .slideshowDots {
+    @apply text-center;
+  }
+  .slideshowDot {
+    @apply mx-[7px] mb-0 mt-[15px] inline-block h-5 w-5 cursor-pointer rounded-[50%] bg-[#c4c4c4];
+  }
+  .slideshowDot.active {
+    @apply bg-[#6a0dad];
+  }
 }
