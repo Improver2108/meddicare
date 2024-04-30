@@ -37,9 +37,9 @@ const BlogCarousal = ({ arr, delay, children }: BlogCarousalProp) => {
   }, [index]);
 
   return (
-    <div className="slideshow relative">
+    <div className="relative mx-auto my-0 max-w-[30rem] overflow-hidden">
       <div
-        className="slideshowSlider"
+        className="whitespace-nowrap transition duration-1000"
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
       >
         {children}

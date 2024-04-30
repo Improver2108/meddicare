@@ -1,25 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@layer components {
-  .slideshow {
-    @apply mx-auto my-0 max-w-[30rem] overflow-hidden;
-  }
-  .slideshowSlider {
-    @apply whitespace-nowrap transition duration-1000;
-  }
-  .slide {
-    @apply inline-block h-fit w-full rounded-[40px] px-5 py-16;
-  }
-
-  /* Buttons */
-  .slideshowDots {
-    @apply text-center;
-  }
-  .slideshowDot {
-    @apply mx-[7px] mb-0 mt-[15px] inline-block h-5 w-5 cursor-pointer rounded-[50%] bg-[#c4c4c4];
-  }
-  .slideshowDot.active {
-    @apply bg-[#6a0dad];
-  }
-}

@@ -9,7 +9,7 @@ const BlogCard = ({ index, bg }: BlogProp) => {
   return (
     <article
       key={index}
-      className="slide relative"
+      className="relative inline-block h-fit w-full rounded-[40px] px-5 py-16"
       style={{ backgroundColor: bg[index] }}
     >
       <Link href={`/blogs/${index}`} key={index}>
