@@ -1,5 +1,8 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { LuSmartphone } from "react-icons/lu";
+import { LuMail } from "react-icons/lu";
+import { MdOutlineLocationOn } from "react-icons/md";
 
 type FormInput = {
   name: string;
@@ -30,6 +33,20 @@ const Contact = () => {
           I have got just what you need.{" "}
           <span className="underline decoration-[#629ea7]">{`Let's Talk`}</span>
         </h2>
+        <div className="space-y-1">
+          <div className="flex items-center justify-center gap-1">
+            <LuSmartphone />
+            <h1>{`91-99999999`}</h1>
+          </div>
+          <div className="flex items-center justify-center gap-1">
+            <LuMail />
+            <h1>{`muskan2208@gmail.com`}</h1>
+          </div>
+          <div className="flex items-center justify-center gap-1">
+            <MdOutlineLocationOn />
+            <h1>{`New Delhi`}</h1>
+          </div>
+        </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex w-[20rem] flex-col gap-2"
