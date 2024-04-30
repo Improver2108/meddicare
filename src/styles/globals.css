@@ -9,7 +9,7 @@
     @apply whitespace-nowrap transition duration-1000;
   }
   .slide {
-    @apply inline-block h-fit w-full rounded-[40px] px-10 py-20;
+    @apply inline-block h-fit w-full rounded-[40px] px-5 py-16;
   }
 
   /* Buttons */
