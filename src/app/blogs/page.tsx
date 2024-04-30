@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-
+import Blogcol from "./blogCol";
 
 const Plans = () => {
   const arr = [...Array<null>(5)];
@@ -80,7 +80,9 @@ const Plans = () => {
             ))}
           </div>
         </div>
+        
       </section>
+      <Blogcol/>
     </main>
 
   );
