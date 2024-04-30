@@ -12,7 +12,6 @@ type BlogCarousalProp = {
 };
 
 const BlogCarousal = ({ arr, delay, children }: BlogCarousalProp) => {
-  console.log("h1");
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef<number | null>(null);
 

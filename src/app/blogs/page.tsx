@@ -2,7 +2,6 @@ import BlogCard from "./blogCard";
 import BlogCarousal from "./BlogCarousal";
 
 const Blogs = () => {
-  console.log("hello");
   const delay = 2500;
   const bg = ["#FAFABE", "#C1EBC0", "#C7CAFF", "#CDABEB", "#F6C2F3"];
   const arr = [...Array<null>(5)];
