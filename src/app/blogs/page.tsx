@@ -1,21 +1,21 @@
-import Blog from "./BlogCard";
+import BlogCard from "./blogCard";
 import BlogCarousal from "./BlogCarousal";
 
-const Plans = () => {
+const Blogs = () => {
   console.log("hello");
   const delay = 2500;
   const bg = ["#FAFABE", "#C1EBC0", "#C7CAFF", "#CDABEB", "#F6C2F3"];
   const arr = [...Array<null>(5)];
   return (
     <main className="flex h-[93vh] flex-col items-center gap-10 px-8 py-3">
-      <section className="flex w-full  ">
+      <section className="flex w-full">
         <BlogCarousal arr={arr} delay={delay}>
           {arr.map((_, i) => (
-            <Blog bg={bg} index={i} key={i} />
+            <BlogCard bg={bg} index={i} key={i} />
           ))}
         </BlogCarousal>
       </section>
     </main>
   );
 };
-export default Plans;
+export default Blogs;
