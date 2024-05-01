@@ -8,7 +8,8 @@ const Blogcol = () => {
   return (
     <section  className="grid grid-cols-1 gap-4">
       {arr.map((_, index) => (
-        <>
+     
+       <>
             <article className="flex-auto">
               <h1><span className="font-bold text-xl">gggggg</span>
               <Link href={`/blogs/${index}`} key={index}>
@@ -23,12 +24,12 @@ const Blogcol = () => {
               explicabo? Quibusdam odio repellat accusantium enim atque porro
               dolore possimus reprehenderit ipsa optio.
               </p></Link>
+          
               </h1>
-        
+       
             </article>
-            
-          <hr />
-        </>
+            <hr />
+            </>
       ))}
     </section>
   );
