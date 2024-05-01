@@ -5,8 +5,16 @@ import Point from "./Points";
 
 export default function Home() {
   return (
-    <main className="z-0 h-[92vh] snap-y snap-mandatory overflow-y-scroll scroll-smooth px-10">
+    <main className="z-0 h-[93vh] snap-y snap-mandatory overflow-y-scroll scroll-smooth px-3 md:px-10">
       <ScrollableComponent className="relative items-center justify-center space-y-2">
+        <section className="absolute top-16 w-[full] text-[#57939d]">
+          <h1 className="font text-center text-3xl font-semibold md:text-5xl">{`Dr Katyal's Healthcare`}</h1>
+          <div className="flex flex-col items-end justify-end text-sm">
+            <h4>By</h4>
+            <h4>Dr Jabdi Katyal</h4>
+            <p>B.H.M.S(B.H.M.C) D.N.H.E</p>
+          </div>
+        </section>
         <Image
           src="/logo.jpg"
           width={200}
@@ -47,7 +55,7 @@ export default function Home() {
           explicabo?
         </p>
       </ScrollableComponent>
-      <ScrollableComponent>
+      <ScrollableComponent className="relative">
         <ul>
           {[...Array<null>(5)].map((e, i) => (
             <Point key={i}>
@@ -57,6 +65,12 @@ export default function Home() {
             </Point>
           ))}
         </ul>
+        <Link
+          href={"/contact"}
+          className="absolute bottom-7 animate-bounce rounded-full bg-gradient-to-r from-[#9dcfd3] to-[#629ea7] p-3"
+        >
+          Book Appointment
+        </Link>
       </ScrollableComponent>
     </main>
   );

@@ -11,7 +11,7 @@ type HeaderProp = {
 const Header = ({ children }: HeaderProp) => {
   const [navVisible, isNavVisible] = useState(false);
   return (
-    <header className="sticky top-0 z-20">
+    <header className="sticky top-0 z-20 h-[7vh]">
       <section className="z-[70] flex h-[3.25em] items-center justify-between bg-gradient-to-r from-[#9dcfd3] to-[#629ea7] px-3">
         <Link href={"/"}>
           <Image

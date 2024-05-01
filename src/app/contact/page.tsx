@@ -1,11 +1,15 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { LuSmartphone } from "react-icons/lu";
+import { LuMail } from "react-icons/lu";
+import { MdOutlineLocationOn } from "react-icons/md";
 
 type FormInput = {
   name: string;
   email: string;
   subject: string;
   message: string;
+  phone: number;
 };
 
 const Contact = () => {
@@ -16,7 +20,7 @@ const Contact = () => {
   } = useForm<FormInput>();
 
   const onSubmit: SubmitHandler<FormInput> = (data) => {
-    window.location.href = `mailto:ashwathama2108@gmail.com?subject=${data.subject}&body=Hey Yash, my name is ${data.name}. ${data.message} (${data.email})`;
+    window.location.href = `mailto:muskan2208@gmail.com?subject=${data.subject}&body=Hey Muskan, my name is ${data.name}. (${data.message}) (${data.phone})`;
   };
 
   return (
@@ -29,6 +33,20 @@ const Contact = () => {
           I have got just what you need.{" "}
           <span className="underline decoration-[#629ea7]">{`Let's Talk`}</span>
         </h2>
+        <div className="space-y-1">
+          <div className="flex items-center justify-center gap-1">
+            <LuSmartphone />
+            <h1>{`91-99999999`}</h1>
+          </div>
+          <div className="flex items-center justify-center gap-1">
+            <LuMail />
+            <h1>{`muskan2208@gmail.com`}</h1>
+          </div>
+          <div className="flex items-center justify-center gap-1">
+            <MdOutlineLocationOn />
+            <h1>{`New Delhi`}</h1>
+          </div>
+        </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex w-[20rem] flex-col gap-2"
@@ -44,6 +62,12 @@ const Contact = () => {
             className="rounded-lg border bg-[#c8e1e2] px-2 py-3"
             type="email"
             {...register("email")}
+          />
+          <input
+            placeholder="Phone Number"
+            className="rounded-lg border bg-[#c8e1e2] px-2 py-3"
+            type="tel"
+            {...register("phone")}
           />
 
           <input
