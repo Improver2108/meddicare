@@ -1,39 +1,10 @@
 "use client"
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-import Blogcol from "./blogCol";
+
 
 const Plans = () => {
   const arr = [...Array<null>(5)];
-  const delay = 2500;
- const bg=["#0088FE", "#00C49F", "#FFBB28","#0088FE", "#00C49F"]
-
-  const [index, setIndex] = useState(0);
-  const timeoutRef = useRef<number | null>(null)
-
-  function resetTimeout() {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-  }
-
-  useEffect(() => {
-    resetTimeout();
-    timeoutRef.current = window.setTimeout(
-      () =>
-        setIndex((prevIndex) =>
-          prevIndex === arr.length - 1 ? 0 : prevIndex + 1
-        ),
-      delay
-    );
-
-    return () => {
-      resetTimeout();
-    };
-  }, [index]);
-
-
-
   return (
     <main className="flex flex-col justify-center items-center gap-10 px-8 py-3 h-[93vh]">
       <h1 className="mt-3 text-2xl font-bold">Blogs</h1>
@@ -80,11 +51,9 @@ const Plans = () => {
             ))}
           </div>
         </div>
-        
       </section>
       <Blogcol/>
     </main>
-
   );
 };
-export default Plans;
+export default Blogs;
