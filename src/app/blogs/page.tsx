@@ -1,5 +1,6 @@
 import BlogCard from "./blogCard";
 import BlogCarousal from "./BlogCarousal";
+import Blogcol from "./blogCol";
 
 const Blogs = () => {
   const delay = 2500;
@@ -13,7 +14,9 @@ const Blogs = () => {
             <BlogCard bg={bg} index={i} key={i} />
           ))}
         </BlogCarousal>
+        
       </section>
+      <Blogcol/>
     </main>
   );
 };
