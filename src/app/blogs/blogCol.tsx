@@ -1,29 +1,36 @@
-"use client"
+"use client";
 import Link from "next/link";
-import Image from 'next/image'
+import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 
 const Blogcol = () => {
-    return (
-    <div className="grid grid-cols-1 gap-4">
-    <div className="flex-auto">
-    <img className="float-right" src="https://via.placeholder.com/150" alt="placeholder" /> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab modi atque incidunt reiciendis, blanditiis cumque perferendis provident explicabo? Quibusdam odio repellat accusantium enim atque porro dolore possimus reprehenderit ipsa optio.
-
-
-    </div>
-    <div className="flex-auto" > <img className="float-right" src="https://via.placeholder.com/150" alt="placeholder" />Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, cupiditate ab in tenetur, ipsam, nam aut voluptates commodi consequuntur veniam doloribus ut explicabo delectus quo quia sapiente sunt dolorum dolore.
-    </div>
-    <div className="flex-auto">
-    <img className="float-right" src="https://via.placeholder.com/150" alt="placeholder" /> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab modi atque incidunt reiciendis, blanditiis cumque perferendis provident explicabo? Quibusdam odio repellat accusantium enim atque porro dolore possimus reprehenderit ipsa optio.
-
-
-    </div>
-    <div className="flex-auto" > <img className="float-right" src="https://via.placeholder.com/150" alt="placeholder" />Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, cupiditate ab in tenetur, ipsam, nam aut voluptates commodi consequuntur veniam doloribus ut explicabo delectus quo quia sapiente sunt dolorum dolore.
-    </div>
-  </div>
-
-
-
-)
-}
+  const arr = [...Array<null>(5)];
+  return (
+    <section  className="grid grid-cols-1 gap-4">
+      {arr.map((_, index) => (
+        <>
+            <article className="flex-auto">
+              <h1><span className="font-bold text-xl">gggggg</span>
+              <Link href={`/blogs/${index}`} key={index}>
+              <img
+                className="float-right line-clamp-4 "
+                src="https://via.placeholder.com/150"
+                alt="placeholder"
+              />{" "}
+              <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab modi
+              atque incidunt reiciendis, blanditiis cumque perferendis provident
+              explicabo? Quibusdam odio repellat accusantium enim atque porro
+              dolore possimus reprehenderit ipsa optio.
+              </p></Link>
+              </h1>
+        
+            </article>
+            
+          <hr />
+        </>
+      ))}
+    </section>
+  );
+};
 export default Blogcol;
