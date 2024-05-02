@@ -1,17 +1,22 @@
+"use client";
+import { api } from "~/trpc/react";
+
 const Page = () => {
+  const home = api.home.get.useQuery();
+  console.log(home.data?.about);
   return (
     <>
       <h1 className="text-xl">Home Page Settings</h1>
       <div>
         <h2 className="text-lg">About Page</h2>
         <form action="">
-          <textarea placeholder="enter content of your about page"></textarea>
+          <textarea defaultValue={home.data?.about}></textarea>
           <button type="submit">Apply Page</button>
         </form>
       </div>
       <div>
         <h2 className="text-xl">Points for service page</h2>
-        <form action="">
+        <form action="" className="space-y-4">
           <input type="text" placeholder="1st point" />
           <input type="text" placeholder="2nd point" />
           <input type="text" placeholder="3rd point" />
