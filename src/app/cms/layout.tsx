@@ -1,20 +1,29 @@
+import { getServerSession } from "next-auth";
+import SessionProvider from "./sessionProvider";
+import Link from "next/link";
 import { ReactNode } from "react";
 
-const Layout = ({ children }: { children: ReactNode }) => {
+const Layout = async ({ children }: { children: ReactNode }) => {
+  const session = await getServerSession();
+  if (!session) {
+    console.log("im not login for cms authentication");
+  }
   return (
-    <main className="">
-      <header>
-        <nav>
-          <ul className="flex gap-3 text-sm">
-            <li>Home</li>
-            <li>Plans</li>
-            <li>Blogs</li>
-            <li>Contact Us</li>
-          </ul>
-        </nav>
-      </header>
-      {children}
-    </main>
+    <SessionProvider>
+      <main className="">
+        <header>
+          <nav>
+            <ul className="flex gap-3 text-sm">
+              <Link href={`/cms/home`}>Home</Link>
+              <Link href={`/cms/plans`}>Plans</Link>
+              <Link href={`/cms/blogs`}>Blogs</Link>
+              <li>Contact Us</li>
+            </ul>
+          </nav>
+        </header>
+        <section className="space-y-4 p-4">{children}</section>
+      </main>
+    </SessionProvider>
   );
 };
 
