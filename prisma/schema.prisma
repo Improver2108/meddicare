@@ -6,21 +6,44 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+    provider  = "postgresql"
+    url       = env("DATABASE_URL")
     directUrl = env("DIRECT_URL")
 }
 
-model Post {
+model Blog {
     id        Int      @id @default(autoincrement())
     name      String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
+    image     String
+    content   String   @db.VarChar(200)
 
     @@index([name])
+}
+
+model Home {
+    id         Int      @id @default(autoincrement())
+    about      String   @db.VarChar(200)
+    aboutImage String
+    points     String[]
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+}
+
+model Plan {
+    id      Int    @id @default(autoincrement())
+    color   String
+    name    String
+    price   Int
+    content String
+}
+
+model Contact {
+    id       Int    @id @default(autoincrement())
+    location String
+    contact  String
+    email    String
 }
 
 // Necessary for Next auth
@@ -58,7 +81,6 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
-    posts         Post[]
 }
 
 model VerificationToken {
