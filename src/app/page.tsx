@@ -40,7 +40,7 @@ export default async function Home() {
           alt="about image"
           width={200}
           height={200}
-          src="/banner.png"
+          src={home?.aboutImage as string}
           className="rounded-full"
         />
         <p>{home?.about}</p>
@@ -48,11 +48,7 @@ export default async function Home() {
       <ScrollableComponent className="relative">
         <ul>
           {[...Array<null>(5)].map((e, i) => (
-            <Point key={i}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum
-              odit magni possimus eum expedita natus consectetur. Provident
-              consequuntur enim quos?
-            </Point>
+            <Point key={i}>{home?.points[i]}</Point>
           ))}
         </ul>
         <Link

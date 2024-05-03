@@ -1,30 +1,56 @@
 "use client";
+import { useForm } from "react-hook-form";
 import { api } from "~/trpc/react";
+
+type HomeFormType = {
+  about: string;
+  points: string[];
+  aboutImage: string;
+};
 
 const Page = () => {
   const home = api.home.get.useQuery();
-  console.log(home.data?.about);
+  const setHome = api.home.upsert.useMutation();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<HomeFormType>();
+
+  const onSubmit = (data: HomeFormType) => {
+    setHome.mutate(data);
+  };
+
   return (
     <>
       <h1 className="text-xl">Home Page Settings</h1>
-      <div>
-        <h2 className="text-lg">About Page</h2>
-        <form action="">
-          <textarea defaultValue={home.data?.about}></textarea>
-          <button type="submit">Apply Page</button>
-        </form>
-      </div>
-      <div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="about">About</label>
+        <textarea
+          defaultValue={home.data?.about}
+          id="about"
+          {...register("about")}
+        />
         <h2 className="text-xl">Points for service page</h2>
-        <form action="" className="space-y-4">
-          <input type="text" placeholder="1st point" />
-          <input type="text" placeholder="2nd point" />
-          <input type="text" placeholder="3rd point" />
-          <input type="text" placeholder="4th point" />
-          <input type="text" placeholder="5th point" />
-          <button type="submit">Apply Changes</button>
-        </form>
-      </div>
+        {[...Array<null>(5)].map((e, i) => (
+          <>
+            <input
+              id={`pont${i}`}
+              type="text"
+              defaultValue={home.data?.points[i]}
+              placeholder="enter point"
+              {...register(`points.${i}`)}
+            />
+            <label htmlFor={`point${i}`}>{i + 1}</label>
+          </>
+        ))}
+        <input
+          type="text"
+          placeholder="image url"
+          {...register("aboutImage")}
+        />
+        <button type="submit">Apply Changes</button>
+      </form>
     </>
   );
 };
