@@ -21,7 +21,9 @@ const Layout = async ({ children }: { children: ReactNode }) => {
             </ul>
           </nav>
         </header>
-        <section className="space-y-4 p-4">{children}</section>
+        <section className="flex flex-col items-center gap-2 space-y-4 p-4">
+          {children}
+        </section>
       </main>
     </SessionProvider>
   );

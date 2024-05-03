@@ -24,32 +24,45 @@ const Page = () => {
   return (
     <>
       <h1 className="text-xl">Home Page Settings</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="about">About</label>
-        <textarea
-          defaultValue={home.data?.about}
-          id="about"
-          {...register("about")}
-        />
-        <h2 className="text-xl">Points for service page</h2>
-        {[...Array<null>(5)].map((e, i) => (
-          <>
-            <input
-              id={`pont${i}`}
-              type="text"
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col space-y-3"
+      >
+        <div>
+          <h2>Tell about yourself!</h2>
+          <textarea
+            defaultValue={home.data?.about}
+            className="w-full rounded-lg bg-[#c8e1e2] px-2 py-3"
+            {...register("about")}
+            minLength={10}
+            maxLength={500}
+          />
+        </div>
+        <hr />
+        <div>
+          <h2>Enter the points for your last page in page(Maximum 5)</h2>
+          {home.data?.points.map((e, i) => (
+            <textarea
+              className="my-2 w-full rounded-lg bg-[#c8e1e2] px-2 py-3"
               defaultValue={home.data?.points[i]}
               placeholder="enter point"
               {...register(`points.${i}`)}
+              minLength={10}
+              maxLength={100}
             />
-            <label htmlFor={`point${i}`}>{i + 1}</label>
-          </>
-        ))}
+          ))}
+        </div>
+        <hr />
         <input
+          className="rounded-lg bg-[#c8e1e2] px-2 py-3"
           type="text"
           placeholder="image url"
           {...register("aboutImage")}
         />
-        <button type="submit">Apply Changes</button>
+        <hr />
+        <button className="rounded-lg bg-[#66a1aa] px-2 py-3" type="submit">
+          Apply Changes
+        </button>
       </form>
     </>
   );
