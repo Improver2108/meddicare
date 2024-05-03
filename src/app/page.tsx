@@ -40,7 +40,7 @@ export default async function Home() {
           alt="about image"
           width={200}
           height={200}
-          src={home?.aboutImage as string}
+          src={home!.aboutImage}
           className="rounded-full"
         />
         <p>{home?.about}</p>
