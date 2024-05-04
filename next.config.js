@@ -7,7 +7,7 @@ await import("./src/env.js");
 /** @type {import("next").NextConfig} */
 const config = {
   images: {
-    domains: ["thumbs.dreamstime.com"],
+    domains: ["krazxqxmlkknzfwqlkug.supabase.co"],
   },
 };
 

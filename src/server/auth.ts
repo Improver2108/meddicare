@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
     }),
     signIn: ({ user }) => {
       //somerthing have to be modified here for authorization
-      if (user.email === "yashrawat2108@gmail.com") return true;
+      if (user.email === env.ADMIN_EMAIL) return true;
       return false;
     },
   },

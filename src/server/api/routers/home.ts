@@ -8,7 +8,7 @@ import {
 import { db } from "~/server/db";
 
 const home = z.object({
-  points: z.string().min(10).max(50).array().length(5),
+  points: z.string().array().length(5),
   about: z.string().min(10).max(500),
   aboutImage: z.string(),
 });
@@ -35,17 +35,9 @@ export const HomeRouter = createTRPCRouter({
         aboutImage: home.aboutImage,
       },
       create: {
-        points: [
-          "Loremqawjeksdlsajdlsadjsaldkjsaldsadas",
-          "Loremqawjeksdlsajdlsadjsaldkjsaldsadas",
-          "Loremqawjeksdlsajdlsadjsaldkjsaldsadas",
-          "Loremqawjeksdlsajdlsadjsaldkjsaldsadas",
-          "Loremqawjeksdlsajdlsadjsaldkjsaldsadas",
-        ],
-        about:
-          "asdsadsadfkjhdsabgfkjdeasbgjkfdsabgfjk.dsafghbdsjka.fbdsajk.fbdsakjfbdsakjfbdsakj.fbdsak",
-        aboutImage:
-          "https://thumbs.dreamstime.com/b/good-health-good-life-female-hand-chalk-writing-text-blue-background-97044786.jpg",
+        points: home.points,
+        about: home.about,
+        aboutImage: home.aboutImage,
       },
     });
   }),

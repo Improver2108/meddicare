@@ -40,7 +40,11 @@ export default async function Home() {
           alt="about image"
           width={200}
           height={200}
-          src={home!.aboutImage}
+          src={
+            home?.aboutImage
+              ? `https://krazxqxmlkknzfwqlkug.supabase.co/storage/v1/object/public/images/${home.aboutImage}`
+              : ""
+          }
           className="rounded-full"
         />
         <p>{home?.about}</p>
