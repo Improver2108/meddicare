@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { api } from "~/trpc/react";
 

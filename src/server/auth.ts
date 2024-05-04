@@ -45,6 +45,11 @@ export const authOptions: NextAuthOptions = {
         id: user.id,
       },
     }),
+    signIn: ({ user }) => {
+      //somerthing have to be modified here for authorization
+      if (user.email === "yashrawat2108@gmail.com") return true;
+      return false;
+    },
   },
   adapter: PrismaAdapter(db) as Adapter,
   providers: [
@@ -62,6 +67,9 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
+  pages: {
+    // signIn: "/auth/signin",
+  },
 };
 
 /**

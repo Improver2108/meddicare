@@ -2,11 +2,14 @@ import { getServerSession } from "next-auth";
 import SessionProvider from "./sessionProvider";
 import Link from "next/link";
 import { ReactNode } from "react";
+import { redirect } from "next/navigation";
+import { authOptions } from "~/server/auth";
 
 const Layout = async ({ children }: { children: ReactNode }) => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
+  console.log(session);
   if (!session) {
-    console.log("im not login for cms authentication");
+    redirect("/api/auth/signin");
   }
   return (
     <SessionProvider>
