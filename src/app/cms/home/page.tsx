@@ -61,7 +61,7 @@ const Page = () => {
         <hr />
         <div>
           <h2>Enter the points for your last page in page(Maximum 5)</h2>
-          {[...Array(5)].map((e, i) => (
+          {[...Array<null>(5)].map((e, i) => (
             <textarea
               key={i}
               className="my-2 w-full rounded-lg bg-[#c8e1e2] px-2 py-3"
