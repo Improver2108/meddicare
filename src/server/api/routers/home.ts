@@ -25,14 +25,13 @@ export const HomeRouter = createTRPCRouter({
       }),
   ),
   upsert: publicProcedure.input(home).mutation(async ({ input: home }) => {
+    console.log("home->", home);
     await db.home.upsert({
       where: {
         id: 1,
       },
       update: {
-        points: home.points,
-        about: home.about,
-        aboutImage: home.aboutImage,
+        ...home,
       },
       create: {
         points: home.points,

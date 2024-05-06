@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaChevronCircleDown } from "react-icons/fa";
 import Point from "./Points";
 import { api } from "~/trpc/server";
+import { env } from "~/env";
 
 export default async function Home() {
   const home = await api.home.get();
@@ -42,7 +43,7 @@ export default async function Home() {
           height={200}
           src={
             home?.aboutImage
-              ? `https://krazxqxmlkknzfwqlkug.supabase.co/storage/v1/object/public/images/${home.aboutImage}`
+              ? `${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${home?.aboutImage}`
               : ""
           }
           className="rounded-full"

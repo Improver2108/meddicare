@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
+import { FormEvent, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { env } from "~/env";
 import { api } from "~/trpc/react";
 import supabase from "~/utils/supbase";
 
@@ -9,35 +11,38 @@ type HomeFormType<T> = {
   points: string[];
   aboutImage: T;
 };
-
 const Page = () => {
   const trpcUtils = api.useUtils();
-  const home = api.home.get.useQuery();
+  const { data: home, isLoading, isError } = api.home.get.useQuery();
+  const {
+    register,
+    formState: { errors, isSubmitSuccessful },
+    handleSubmit,
+  } = useForm<HomeFormType<File[]>>();
   const setHome = api.home.upsert.useMutation({
     onSuccess: async () => await trpcUtils.home.get.invalidate(),
   });
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    setValue,
-    reset,
-  } = useForm<HomeFormType<File[]>>();
 
-  console.log(home.data);
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error fetching data</p>;
 
   const onSubmit = async (formData: HomeFormType<File[]>) => {
-    console.log(formData);
-    const { data, error } = await supabase.storage
-      .from("images")
-      .upload(
-        `public/${formData.aboutImage[0]?.name}`,
-        formData.aboutImage[0] ? formData.aboutImage[0] : "",
-      );
-    reset();
+    console.log("formData =>", formData);
+    let file = home?.aboutImage;
+    if (formData.aboutImage[0]) {
+      await supabase.storage.from("images").remove([home?.aboutImage ?? ""]);
+      const { data, error } = await supabase.storage
+        .from("images")
+        .upload(
+          `public/${formData.aboutImage[0]?.name}`,
+          formData.aboutImage[0] ? formData.aboutImage[0] : "",
+        );
+      if (error) console.log("error uploading image");
+      else file = data?.path;
+    }
     setHome.mutate({
       ...formData,
-      aboutImage: data!.path,
+      aboutImage: file ?? "",
     });
   };
 
@@ -50,12 +55,11 @@ const Page = () => {
       >
         <div>
           <h2>Tell about yourself!</h2>
+
           <textarea
-            defaultValue={home.data?.about}
+            defaultValue={home?.about}
             className="w-full rounded-lg bg-[#c8e1e2] px-2 py-3"
             {...register("about")}
-            minLength={10}
-            maxLength={500}
           />
         </div>
         <hr />
@@ -65,12 +69,10 @@ const Page = () => {
             <textarea
               key={i}
               className="my-2 w-full rounded-lg bg-[#c8e1e2] px-2 py-3"
-              defaultValue={home.data?.points[i]}
               placeholder="enter point"
+              defaultValue={home?.points[i]}
               {...register(`points.${i}`)}
-              minLength={10}
-              maxLength={100}
-            />
+            ></textarea>
           ))}
         </div>
         <hr />
@@ -87,7 +89,7 @@ const Page = () => {
         </button>
       </form>
       <Image
-        src={`https://krazxqxmlkknzfwqlkug.supabase.co/storage/v1/object/public/images/${home.data?.aboutImage}`}
+        src={`${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${home?.aboutImage}`}
         width={1000}
         height={100}
         alt="image"
