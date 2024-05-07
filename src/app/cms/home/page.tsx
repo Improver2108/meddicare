@@ -17,6 +17,7 @@ const Page = () => {
   const {
     register,
     formState: { errors, isSubmitSuccessful },
+    reset,
     handleSubmit,
   } = useForm<HomeFormType<File[]>>();
   const setHome = api.home.upsert.useMutation({

@@ -8,8 +8,8 @@ import {
 import { db } from "~/server/db";
 
 const home = z.object({
-  points: z.string().array().length(5),
-  about: z.string().min(10).max(500),
+  points: z.string().min(10).max(500).array().length(5),
+  about: z.string().min(10).max(1000),
   aboutImage: z.string(),
 });
 
