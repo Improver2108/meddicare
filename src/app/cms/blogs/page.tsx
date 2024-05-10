@@ -1,5 +1,7 @@
+import Editor from "./editor";
+
 const Page = () => {
-  return <div>HI</div>;
+  return <Editor />;
 };
 
 export default Page;

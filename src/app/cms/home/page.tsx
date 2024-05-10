@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { FormEvent, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { env } from "~/env";
 import { api } from "~/trpc/react";
@@ -28,7 +27,6 @@ const Page = () => {
   if (isError) return <p>Error fetching data</p>;
 
   const onSubmit = async (formData: HomeFormType<File[]>) => {
-    console.log("formData =>", formData);
     let file = home?.aboutImage;
     if (formData.aboutImage[0]) {
       await supabase.storage.from("images").remove([home?.aboutImage ?? ""]);
