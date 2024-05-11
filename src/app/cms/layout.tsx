@@ -20,7 +20,7 @@ const Layout = async ({ children }: { children: ReactNode }) => {
               <Link href={`/cms/home`}>Home</Link>
               <Link href={`/cms/plans`}>Plans</Link>
               <Link href={`/cms/blogs`}>Blogs</Link>
-              <li>Contact Us</li>
+              <Link href={`/cms/contacts`}>Contact Us</Link>
             </ul>
           </nav>
         </header>
