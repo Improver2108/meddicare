@@ -11,16 +11,34 @@ const blog = z.object({
   name: z.string(),
   image: z.string(),
   content: z.string(),
+  highlight: z.string().optional(),
 });
 
+const id = z.number();
+
 export const BlogRouter = createTRPCRouter({
-  get: publicProcedure.query(
+  getList: publicProcedure.query(
     async () =>
-      await db.blog.findFirst({
+      await db.blog.findMany({
         select: {
+          id: true,
           name: true,
           image: true,
+          highlight: true,
+        },
+      }),
+  ),
+  getContent: publicProcedure.input(id).query(
+    async ({ input: id }) =>
+      await db.blog.findUnique({
+        where: {
+          id: id,
+        },
+        select: {
           content: true,
+          name: true,
+          image: true,
+          highlight: true,
         },
       }),
   ),

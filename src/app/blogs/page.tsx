@@ -1,6 +1,6 @@
 import BlogCard from "./blogCard";
 import BlogCarousal from "./BlogCarousal";
-import BlogCol from "./blogCol";
+import BlogCol from "../_components/BlogCol";
 
 const Blogs = () => {
   const delay = 2500;

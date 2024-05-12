@@ -11,14 +11,12 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 type TBlogFormData = {
   name: string;
   content: string;
+  highlight: string;
   image: File[];
 };
 
 const Editor = () => {
-  const trpcUtils = api.useUtils();
-  const blogPost = api.blog.post.useMutation({
-    onSuccess: async () => await trpcUtils.blog.get.invalidate(),
-  });
+  const blogPost = api.blog.post.useMutation();
   const [quillContent, setQuillContent] = useState<string>();
   const {
     register,
@@ -63,6 +61,11 @@ const Editor = () => {
         type="text"
         placeholder="New Post Title Here..."
         {...register("name", { required: "Title is required!" })}
+      />
+      <textarea
+        className="text-2xl font-extrabold outline-none placeholder:text-[#525252]"
+        placeholder="Write a Summary for your post..."
+        {...register("highlight")}
       />
       <ReactQuill
         id="content"

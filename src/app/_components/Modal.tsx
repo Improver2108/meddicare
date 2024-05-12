@@ -1,17 +1,9 @@
-"use client";
-import { useRouter } from "next/navigation";
 const Modal = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
   return (
-    <div className="fixed inset-0 z-[20] flex h-screen w-screen flex-col items-center justify-center bg-black/[.54] text-white">
-      {children}
-      <button
-        onClick={() => {
-          router.back();
-        }}
-      >
-        Go Back
-      </button>
+    <div className="fixed inset-0 z-[22] my-0 flex h-screen w-screen flex-col items-center justify-center bg-black/[.54]">
+      <div className="z-[40] flex flex-col items-center justify-center gap-3 rounded-lg bg-white px-7 py-5">
+        {children}
+      </div>
     </div>
   );
 };

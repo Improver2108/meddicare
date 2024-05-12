@@ -1,6 +1,4 @@
-"use client";
 import Link from "next/link";
-import { useState } from "react";
 
 const Page = () => {
   const plans = [
@@ -11,17 +9,32 @@ const Page = () => {
   return (
     <>
       {plans.map((plan, i) => (
-        <article className="w-full space-y-2 rounded-xl border-2 p-2" key={i}>
+        <article
+          className="flex w-full flex-col gap-1 rounded-xl border-2 p-2"
+          key={i}
+        >
           <h1>{plan.name}</h1>
           <ul>
             {plan.points.map((point, i) => (
               <li key={i}>{point}</li>
             ))}
           </ul>
-          <button className="rounded-xl bg-[#75aeb5] px-2 py-1">edit</button>
+          <Link
+            href={{
+              pathname: "/cms/plans/form",
+              query: {
+                data: JSON.stringify({
+                  name: plan.name,
+                  points: plan.points,
+                }),
+              },
+            }}
+            className="w-fit rounded-xl bg-[#75aeb5] px-2 py-1"
+          >
+            edit
+          </Link>
         </article>
       ))}
-      <Link href={"/cms/plans/form"}>This is the link</Link>
     </>
   );
 };
