@@ -79,9 +79,10 @@ const Editor = () => {
           toolbar: [
             [{ header: [1, 2, false] }],
             ["bold", "italic", "underline"],
+            [{ color: [] }],
+            [{ align: [] }],
             [{ list: "ordered" }, { list: "bullet" }],
-            ["link", "image"],
-            ["code-block"],
+            ["link"],
           ],
         }}
         theme="snow"

@@ -3,7 +3,7 @@ import { api } from "~/trpc/react";
 import Editor from "./editor";
 
 const BlogsPage = () => {
-  return <BlogCol />;
+  return <Editor />;
 };
 
 export default BlogsPage;
