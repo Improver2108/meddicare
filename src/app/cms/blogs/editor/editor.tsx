@@ -1,11 +1,13 @@
 "use client";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import DOMPurify from "dompurify";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { api } from "~/trpc/react";
 import supabase from "~/utils/supbase";
+import Image from "next/image";
+import { env } from "~/env";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 type TBlogFormData = {
@@ -18,10 +20,8 @@ type TBlogFormData = {
 type TEditorProp = {
   id?: number;
 };
-
 const Editor = ({ id }: TEditorProp) => {
   const blogPost = api.blog.post.useMutation();
-  const [quillContent, setQuillContent] = useState<string>();
   const {
     register,
     handleSubmit,
@@ -29,30 +29,40 @@ const Editor = ({ id }: TEditorProp) => {
     setValue,
     formState: { errors },
   } = useForm<TBlogFormData>();
-  let getBlogData;
+  const [quillContent, setQuillContent] = useState<string>();
   if (id) {
-    const { data, isLoading, isError } = api.blog.getContent.useQuery(id);
-    if (isLoading) return <h1>...Loading</h1>;
+    var {
+      data: getBlogData,
+      isLoading,
+      isError,
+    } = api.blog.getContent.useQuery(id);
+    useEffect(() => {
+      if (getBlogData) {
+        setQuillContent(getBlogData.content);
+        setValue("content", getBlogData.content);
+      }
+    }, [getBlogData]);
+    if (isLoading) return <h1>loading...</h1>;
     if (isError) return <h1>Error</h1>;
-    getBlogData = data;
   }
 
   const onSubmit = async (formData: TBlogFormData) => {
-    const { data, error } = await supabase.storage
-      .from("images")
-      .upload(`blogs/${formData.image[0]!.name}`, formData.image[0] ?? "");
-    if (error) console.log("error uploading file");
-    else {
-      const clean = DOMPurify.sanitize(formData.content);
-      blogPost.mutate({
-        ...formData,
-        content: clean,
-        image: data.path,
-      });
-      setQuillContent("");
-      reset();
-      console.log("successfully uploaded file");
-    }
+    // const { data, error } = await supabase.storage
+    //   .from("images")
+    //   .upload(`blogs/${formData.image[0]!.name}`, formData.image[0] ?? "");
+    // if (error) console.log("error uploading file");
+    // else {
+    //   const clean = DOMPurify.sanitize(formData.content);
+    //   blogPost.mutate({
+    //     ...formData,
+    //     content: clean,
+    //     image: data.path,
+    //   });
+    //   setQuillContent("");
+    //   reset();
+    //   console.log("successfully uploaded file");
+    // }
+    console.log(formData);
   };
 
   return (
@@ -60,6 +70,13 @@ const Editor = ({ id }: TEditorProp) => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex w-full flex-col gap-3"
     >
+      <Image
+        src={`${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${getBlogData?.image}`}
+        width={800}
+        height={800}
+        hidden={getBlogData ? false : true}
+        alt="cover image"
+      />
       <input
         className="rounded-lg bg-[#c8e1e2] px-2 py-3"
         type="file"
@@ -71,17 +88,20 @@ const Editor = ({ id }: TEditorProp) => {
         className="text-5xl font-extrabold outline-none placeholder:text-[#525252]"
         type="text"
         placeholder="New Post Title Here..."
+        defaultValue={getBlogData?.name}
         {...register("name", { required: "Title is required!" })}
       />
       <textarea
         className="text-2xl font-extrabold outline-none placeholder:text-[#525252]"
         placeholder="Write a Summary for your post..."
+        defaultValue={getBlogData?.highlight ?? ""}
         {...register("highlight")}
       />
       <ReactQuill
         id="content"
         value={quillContent}
         onChange={(content) => {
+          console.log(content);
           setValue("content", content);
         }}
         placeholder="Write your post content here..."
