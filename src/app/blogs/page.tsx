@@ -15,7 +15,7 @@ const Blogs = () => {
           ))}
         </BlogCarousal>
       </section>
-      <BlogCol />
+      <BlogCol editingAllowed={false} />
     </main>
   );
 };

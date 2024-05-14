@@ -15,7 +15,11 @@ type TBlogFormData = {
   image: File[];
 };
 
-const Editor = () => {
+type TEditorProp = {
+  id?: number;
+};
+
+const Editor = ({ id }: TEditorProp) => {
   const blogPost = api.blog.post.useMutation();
   const [quillContent, setQuillContent] = useState<string>();
   const {
@@ -25,6 +29,13 @@ const Editor = () => {
     setValue,
     formState: { errors },
   } = useForm<TBlogFormData>();
+  let getBlogData;
+  if (id) {
+    const { data, isLoading, isError } = api.blog.getContent.useQuery(id);
+    if (isLoading) return <h1>...Loading</h1>;
+    if (isError) return <h1>Error</h1>;
+    getBlogData = data;
+  }
 
   const onSubmit = async (formData: TBlogFormData) => {
     const { data, error } = await supabase.storage

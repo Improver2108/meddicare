@@ -14,15 +14,25 @@ const Blog = ({ params }: { params: { id: string } }) => {
     ? DOMPurify.sanitize(data?.content)
     : "";
   return (
-    <article>
-      <h1 className="text-5xl">{data?.name}</h1>
+    <article className="mx-auto flex max-w-[70rem] flex-col items-center gap-4 border-4 border-black px-3 py-2">
       <Image
+        className="w-full"
         src={`${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${data?.image}`}
-        width={400}
-        height={400}
+        width={1000}
+        height={1000}
         alt="blog image"
       />
-      <section dangerouslySetInnerHTML={{ __html: sanitizedContent }}></section>
+      <div>
+        <h1 className="text-6xl font-extrabold">
+          It happened on Medium: March roundup
+        </h1>
+        <h4>{data?.highlight}</h4>
+      </div>
+
+      <section
+        dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+        className="w-full"
+      ></section>
     </article>
   );
 };
