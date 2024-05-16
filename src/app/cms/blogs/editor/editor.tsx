@@ -66,10 +66,12 @@ const Editor = ({ id }: TEditorProp) => {
       if (error) console.log("error uploading file");
       else file = data.path;
     }
+    const cleanContent = DOMPurify.sanitize(formData.content);
     if (file) {
       if (id) {
         blogUpdate.mutate({
           ...formData,
+          content: cleanContent,
           image: file,
           id: id,
         });
@@ -77,6 +79,7 @@ const Editor = ({ id }: TEditorProp) => {
       }
       blogPost.mutate({
         ...formData,
+        content: cleanContent,
         image: file,
       });
       console.log("successfully uploaded file");
