@@ -33,11 +33,10 @@ model Home {
 }
 
 model Plan {
-    id      Int    @id @default(autoincrement())
-    color   String
+    id      Int      @id @default(autoincrement())
     name    String
     price   Int
-    content String
+    content String[]
 }
 
 model Contact {

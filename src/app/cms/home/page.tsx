@@ -15,7 +15,7 @@ const Page = () => {
   const { data: home, isLoading, isError } = api.home.get.useQuery();
   const {
     register,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
     reset,
     handleSubmit,
   } = useForm<HomeFormType<File[]>>();

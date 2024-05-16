@@ -24,7 +24,7 @@ export const HomeRouter = createTRPCRouter({
         },
       }),
   ),
-  upsert: publicProcedure.input(home).mutation(async ({ input: home }) => {
+  upsert: protectedProcedure.input(home).mutation(async ({ input: home }) => {
     console.log("home->", home);
     await db.home.upsert({
       where: {

@@ -1,22 +1,25 @@
 import Link from "next/link";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { api } from "~/trpc/server";
 
-const Page = () => {
-  const plans = [
-    { name: "standard plan", points: ["1", "2", "3", "4"] },
-    { name: "premium plan", points: ["1", "2", "3", "4"] },
-  ];
+const Page = async () => {
+  const plans = await api.plan.get();
+  // const plans = [
+  //   { name: "standard plan", points: ["1", "2", "3", "4"] },
+  //   { name: "premium plan", points: ["1", "2", "3", "4"] },
+  // ];
 
   return (
-    <>
+    <section className="flex flex-col items-center gap-2 p-4">
       {plans.map((plan, i) => (
         <article
           className="flex w-full flex-col gap-1 rounded-xl border-2 p-2"
           key={i}
         >
-          <h1>{plan.name}</h1>
+          <h3>{plan.name}</h3>
+          {plan.price !== -1 && <h4>{`Rs ${plan.price}`}</h4>}
           <ul>
-            {plan.points.map((point, i) => (
+            {plan.content.map((point, i) => (
               <li key={i}>{point}</li>
             ))}
           </ul>
@@ -27,7 +30,8 @@ const Page = () => {
                 query: {
                   data: JSON.stringify({
                     name: plan.name,
-                    points: plan.points,
+                    price: plan.price,
+                    points: plan.content,
                   }),
                 },
               }}
@@ -43,7 +47,8 @@ const Page = () => {
           </div>
         </article>
       ))}
-    </>
+      <Link href={"/cms/plans/form"}>Add more plans</Link>
+    </section>
   );
 };
 
