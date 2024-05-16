@@ -12,6 +12,7 @@ const blog = z.object({
   image: z.string(),
   content: z.string(),
   highlight: z.string().optional(),
+  id: z.number().optional(),
 });
 
 const id = z.number();
@@ -42,11 +43,30 @@ export const BlogRouter = createTRPCRouter({
         },
       }),
   ),
-  post: publicProcedure.input(blog).mutation(async ({ input: blog }) => {
-    await db.blog.create({
+  post: protectedProcedure.input(blog).mutation(
+    async ({ input: blog }) =>
+      await db.blog.create({
+        data: {
+          ...blog,
+        },
+      }),
+  ),
+  update: protectedProcedure.input(blog).mutation(async ({ input: blog }) => {
+    await db.blog.update({
+      where: {
+        id: blog.id,
+      },
       data: {
         ...blog,
       },
     });
   }),
+  delete: protectedProcedure.input(z.object({ id: z.number() })).mutation(
+    async ({ input: { id } }) =>
+      await db.blog.delete({
+        where: {
+          id: id,
+        },
+      }),
+  ),
 });

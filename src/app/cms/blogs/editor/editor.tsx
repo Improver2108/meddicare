@@ -8,6 +8,7 @@ import { api } from "~/trpc/react";
 import supabase from "~/utils/supbase";
 import Image from "next/image";
 import { env } from "~/env";
+import generateRandomID from "~/utils/randomID";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 type TBlogFormData = {
@@ -21,7 +22,15 @@ type TEditorProp = {
   id?: number;
 };
 const Editor = ({ id }: TEditorProp) => {
-  const blogPost = api.blog.post.useMutation();
+  const [quillContent, setQuillContent] = useState<string>();
+  const trpcUtils = api.useUtils();
+  const blogPost = api.blog.post.useMutation({
+    onSuccess: async () => await trpcUtils.blog.getContent.invalidate(),
+  });
+  const blogUpdate = api.blog.update.useMutation({
+    onSuccess: async () => await trpcUtils.blog.getContent.invalidate(),
+  });
+
   const {
     register,
     handleSubmit,
@@ -29,40 +38,52 @@ const Editor = ({ id }: TEditorProp) => {
     setValue,
     formState: { errors },
   } = useForm<TBlogFormData>();
-  const [quillContent, setQuillContent] = useState<string>();
-  if (id) {
-    var {
-      data: getBlogData,
-      isLoading,
-      isError,
-    } = api.blog.getContent.useQuery(id);
-    useEffect(() => {
-      if (getBlogData) {
-        setQuillContent(getBlogData.content);
-        setValue("content", getBlogData.content);
-      }
-    }, [getBlogData]);
-    if (isLoading) return <h1>loading...</h1>;
-    if (isError) return <h1>Error</h1>;
-  }
+
+  const {
+    data: getBlogData,
+    isLoading,
+    isError,
+  } = api.blog.getContent.useQuery(id ?? -1);
+
+  useEffect(() => {
+    if (getBlogData) {
+      setQuillContent(getBlogData.content);
+      setValue("content", getBlogData.content);
+      // setValue("image", getBlogData.image);
+    }
+  }, [getBlogData]);
+
+  if (id && isLoading) return <h1>loading..</h1>;
+  if (id && isError) return <h1>error</h1>;
 
   const onSubmit = async (formData: TBlogFormData) => {
-    // const { data, error } = await supabase.storage
-    //   .from("images")
-    //   .upload(`blogs/${formData.image[0]!.name}`, formData.image[0] ?? "");
-    // if (error) console.log("error uploading file");
-    // else {
-    //   const clean = DOMPurify.sanitize(formData.content);
-    //   blogPost.mutate({
-    //     ...formData,
-    //     content: clean,
-    //     image: data.path,
-    //   });
-    //   setQuillContent("");
-    //   reset();
-    //   console.log("successfully uploaded file");
-    // }
-    console.log(formData);
+    let file = getBlogData?.image;
+    if (formData.image[0]) {
+      console.log(formData.image[0]);
+      const { data, error } = await supabase.storage
+        .from("images")
+        .upload(`blogs/${generateRandomID()}`, formData.image[0]);
+      if (error) console.log("error uploading file");
+      else file = data.path;
+    }
+    if (file) {
+      if (id) {
+        blogUpdate.mutate({
+          ...formData,
+          image: file,
+          id: id,
+        });
+        return;
+      }
+      blogPost.mutate({
+        ...formData,
+        image: file,
+      });
+      console.log("successfully uploaded file");
+      return;
+    }
+
+    console.log("error uploading");
   };
 
   return (
@@ -82,7 +103,9 @@ const Editor = ({ id }: TEditorProp) => {
         type="file"
         accept="image/*"
         placeholder="image url"
-        {...register("image", { required: "Image is required!" })}
+        {...register("image", {
+          required: getBlogData?.image ? false : "Image is required!",
+        })}
       />
       <input
         className="text-5xl font-extrabold outline-none placeholder:text-[#525252]"
@@ -101,7 +124,6 @@ const Editor = ({ id }: TEditorProp) => {
         id="content"
         value={quillContent}
         onChange={(content) => {
-          console.log(content);
           setValue("content", content);
         }}
         placeholder="Write your post content here..."

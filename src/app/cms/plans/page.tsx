@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 const Page = () => {
   const plans = [
@@ -19,20 +20,27 @@ const Page = () => {
               <li key={i}>{point}</li>
             ))}
           </ul>
-          <Link
-            href={{
-              pathname: "/cms/plans/form",
-              query: {
-                data: JSON.stringify({
-                  name: plan.name,
-                  points: plan.points,
-                }),
-              },
-            }}
-            className="w-fit rounded-xl bg-[#75aeb5] px-2 py-1"
-          >
-            edit
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href={{
+                pathname: "/cms/plans/form",
+                query: {
+                  data: JSON.stringify({
+                    name: plan.name,
+                    points: plan.points,
+                  }),
+                },
+              }}
+              className="flex items-center gap-1 rounded-lg bg-blue-500 px-2 py-1 text-sm text-white"
+            >
+              <MdEdit />
+              <p>Edit</p>
+            </Link>
+            <button className="flex items-center gap-1 rounded-lg bg-red-500 px-2 py-1 text-sm text-white">
+              <MdDelete />
+              <p>Delete</p>
+            </button>
+          </div>
         </article>
       ))}
     </>
