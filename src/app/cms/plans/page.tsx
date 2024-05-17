@@ -30,7 +30,8 @@ const GetPlansPage = () => {
           key={i}
         >
           <h3>{plan.name}</h3>
-          {plan.price !== -1 && <h4>{`Rs ${plan.price}`}</h4>}
+          <p>{plan.highlight}</p>
+          <h4>{`Rs ${plan.price}`}</h4>
           <ul>
             {plan.points.map((point, i) => (
               <li key={i}>{point}</li>
@@ -46,6 +47,7 @@ const GetPlansPage = () => {
                     price: plan.price,
                     points: plan.points,
                     id: plan.id,
+                    highlight: plan.highlight,
                   }),
                 },
               }}

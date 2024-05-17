@@ -6,6 +6,7 @@ type TPlanForm = {
   name: string;
   price: number;
   points: string[];
+  highlight: string;
   id: number;
 };
 const FormPage = () => {
@@ -18,6 +19,7 @@ const FormPage = () => {
         price: -1,
         points: [],
         id: -1,
+        highlight: "",
       };
   return (
     <Form
@@ -25,6 +27,7 @@ const FormPage = () => {
       points={parseData.points}
       price={parseData.price}
       id={parseData.id}
+      highlight={parseData.highlight}
     />
   );
 };

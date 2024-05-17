@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { LuSmartphone } from "react-icons/lu";
 import { LuMail } from "react-icons/lu";
 import { MdOutlineLocationOn } from "react-icons/md";
+import { api } from "~/trpc/react";
 
 type FormInput = {
   name: string;
@@ -19,8 +20,13 @@ const Contact = () => {
     handleSubmit,
   } = useForm<FormInput>();
 
+  const { data: contact, isLoading, isError } = api.contact.get.useQuery();
+
+  if (isLoading) <p>Loading...</p>;
+  if (isError) <p>Error...</p>;
+
   const onSubmit: SubmitHandler<FormInput> = (data) => {
-    window.location.href = `mailto:muskan2208@gmail.com?subject=${data.subject}&body=Hey Muskan, my name is ${data.name}. (${data.message}) (${data.phone})`;
+    window.location.href = `mailto:${contact?.email}?subject=${data.subject}&body=Hey Muskan, my name is ${data.name}. (${data.message}) (${data.phone})`;
   };
 
   return (
@@ -36,15 +42,15 @@ const Contact = () => {
         <div className="space-y-1">
           <div className="flex items-center justify-center gap-1">
             <LuSmartphone />
-            <h1>{`91-99999999`}</h1>
+            <h1>{`91-${contact?.phone}`}</h1>
           </div>
           <div className="flex items-center justify-center gap-1">
             <LuMail />
-            <h1>{`muskan2208@gmail.com`}</h1>
+            <h1>{contact?.email}</h1>
           </div>
           <div className="flex items-center justify-center gap-1">
             <MdOutlineLocationOn />
-            <h1>{`New Delhi`}</h1>
+            <h1>{contact?.location}</h1>
           </div>
         </div>
         <form

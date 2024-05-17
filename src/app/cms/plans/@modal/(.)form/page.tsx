@@ -7,6 +7,7 @@ type TPlanForm = {
   name: string;
   price: number;
   points: string[];
+  highlight: string;
   id: number;
 };
 
@@ -20,6 +21,7 @@ const FormModalPage = () => {
         price: -1,
         points: [],
         id: -1,
+        highlight: "",
       };
   return (
     <Modal>
@@ -28,6 +30,7 @@ const FormModalPage = () => {
         points={parseData.points}
         price={parseData.price}
         id={parseData.id}
+        highlight={parseData.highlight}
       />
     </Modal>
   );

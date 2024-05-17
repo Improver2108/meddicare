@@ -10,15 +10,17 @@ type TFromProp = {
   price: number;
   points: string[];
   id: number;
+  highlight: string;
 };
 
 type TPlanForm = {
   name: string;
   price: number;
   points: string[];
+  highlight: string;
 };
 
-const Form = ({ name, price, points, id }: TFromProp) => {
+const Form = ({ name, price, points, id, highlight }: TFromProp) => {
   const trpcUtils = api.useUtils();
   const [pointsInput, setPointsInput] = useState<number>(
     Math.max(points.length, 1),
@@ -75,6 +77,13 @@ const Form = ({ name, price, points, id }: TFromProp) => {
           defaultValue={name}
           required
           {...register(`name`, { required: true })}
+        />
+        <textarea
+          placeholder="Enter the highlight"
+          className="rounded-lg bg-[#c8e1e2] px-2 py-3"
+          defaultValue={highlight}
+          required
+          {...register(`highlight`, { required: true })}
         />
         <input
           type="number"

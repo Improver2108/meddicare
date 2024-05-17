@@ -11,6 +11,7 @@ const plan = z.object({
   name: string(),
   points: string().array().min(1).max(5),
   price: z.number().min(0),
+  highlight: z.string(),
   id: z.number().optional(),
 });
 
@@ -23,6 +24,7 @@ export const PlanRouter = createTRPCRouter({
           name: true,
           points: true,
           price: true,
+          highlight: true,
         },
       }),
   ),
