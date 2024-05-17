@@ -33,10 +33,10 @@ model Home {
 }
 
 model Plan {
-    id      Int      @id @default(autoincrement())
-    name    String
-    price   Int
-    content String[]
+    id     Int      @id @default(autoincrement())
+    name   String
+    price  Int
+    points String[]
 }
 
 model Contact {

@@ -33,8 +33,7 @@ const Form = ({ name, price, points }: TPlanForm) => {
   const handleFormSubmit = (formData: TPlanForm) => {
     console.log(formData);
     setPlan.mutate({
-      name: formData.name,
-      content: formData.points,
+      ...formData,
       price: Number(formData.price),
     });
     console.log("plan posted!!!");

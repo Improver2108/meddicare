@@ -9,7 +9,7 @@ import { db } from "~/server/db";
 
 const plan = z.object({
   name: string(),
-  content: string().array().min(1).max(5),
+  points: string().array().min(1).max(5),
   price: z.number().min(0),
 });
 
@@ -19,7 +19,7 @@ export const PlanRouter = createTRPCRouter({
       await db.plan.findMany({
         select: {
           name: true,
-          content: true,
+          points: true,
           price: true,
         },
       }),
