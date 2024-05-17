@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { api } from "~/trpc/react";
 
@@ -11,14 +12,14 @@ const GetPlansPage = () => {
   });
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error...</p>;
-  // const plans = [
-  //   { name: "standard plan", points: ["1", "2", "3", "4"] },
-  //   { name: "premium plan", points: ["1", "2", "3", "4"] },
-  // ];
   const handlePlanDelete = async (id: number) => {
     deletePlan.mutate({
       id: id,
     });
+  };
+
+  const handleMorePost = () => {
+    if (plans?.length && plans.length >= 3) console.log("cant add more");
   };
 
   return (
@@ -63,7 +64,9 @@ const GetPlansPage = () => {
           </div>
         </article>
       ))}
-      <Link href={"/cms/plans/form"}>Add more plans</Link>
+      {(!plans?.length || plans.length < 3) && (
+        <Link href={"/cms/plans/form"}>Add more plans</Link>
+      )}
     </section>
   );
 };

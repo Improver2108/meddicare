@@ -19,6 +19,7 @@ type TPlanForm = {
 };
 
 const Form = ({ name, price, points, id }: TFromProp) => {
+  const trpcUtils = api.useUtils();
   const [pointsInput, setPointsInput] = useState<number>(
     Math.max(points.length, 1),
   );
@@ -28,8 +29,12 @@ const Form = ({ name, price, points, id }: TFromProp) => {
     formState: { errors },
     handleSubmit,
   } = useForm<TPlanForm>();
-  const setPlan = api.plan.post.useMutation();
-  const updatePlan = api.plan.update.useMutation();
+  const setPlan = api.plan.post.useMutation({
+    onSuccess: async () => await trpcUtils.plan.get.invalidate(),
+  });
+  const updatePlan = api.plan.update.useMutation({
+    onSuccess: async () => await trpcUtils.plan.get.invalidate(),
+  });
 
   const handlePointDelete = (i: number) => {
     if (i > points.length - 1) {
@@ -46,13 +51,14 @@ const Form = ({ name, price, points, id }: TFromProp) => {
         price: Number(formData.price),
         id: id,
       });
-      return;
+    } else {
+      setPlan.mutate({
+        ...formData,
+        price: Number(formData.price),
+      });
     }
-    setPlan.mutate({
-      ...formData,
-      price: Number(formData.price),
-    });
     console.log("plan posted!!!");
+    router.back();
   };
 
   return (
