@@ -1,17 +1,29 @@
+"use client";
 import Link from "next/link";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { api } from "~/trpc/server";
+import { api } from "~/trpc/react";
 
-const Page = async () => {
-  const plans = await api.plan.get();
+const GetPlansPage = () => {
+  const trpcUtils = api.useUtils();
+  const { data: plans, isError, isLoading } = api.plan.get.useQuery();
+  const deletePlan = api.plan.delete.useMutation({
+    onSuccess: async () => await trpcUtils.plan.get.invalidate(),
+  });
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error...</p>;
   // const plans = [
   //   { name: "standard plan", points: ["1", "2", "3", "4"] },
   //   { name: "premium plan", points: ["1", "2", "3", "4"] },
   // ];
+  const handlePlanDelete = async (id: number) => {
+    deletePlan.mutate({
+      id: id,
+    });
+  };
 
   return (
     <section className="flex flex-col items-center gap-2 p-4">
-      {plans.map((plan, i) => (
+      {plans?.map((plan, i) => (
         <article
           className="flex w-full flex-col gap-1 rounded-xl border-2 p-2"
           key={i}
@@ -32,6 +44,7 @@ const Page = async () => {
                     name: plan.name,
                     price: plan.price,
                     points: plan.points,
+                    id: plan.id,
                   }),
                 },
               }}
@@ -40,7 +53,10 @@ const Page = async () => {
               <MdEdit />
               <p>Edit</p>
             </Link>
-            <button className="flex items-center gap-1 rounded-lg bg-red-500 px-2 py-1 text-sm text-white">
+            <button
+              className="flex items-center gap-1 rounded-lg bg-red-500 px-2 py-1 text-sm text-white"
+              onClick={() => handlePlanDelete(plan.id)}
+            >
               <MdDelete />
               <p>Delete</p>
             </button>
@@ -52,4 +68,4 @@ const Page = async () => {
   );
 };
 
-export default Page;
+export default GetPlansPage;

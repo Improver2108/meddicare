@@ -5,13 +5,20 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { api } from "~/trpc/react";
 
+type TFromProp = {
+  name: string;
+  price: number;
+  points: string[];
+  id: number;
+};
+
 type TPlanForm = {
   name: string;
   price: number;
   points: string[];
 };
 
-const Form = ({ name, price, points }: TPlanForm) => {
+const Form = ({ name, price, points, id }: TFromProp) => {
   const [pointsInput, setPointsInput] = useState<number>(
     Math.max(points.length, 1),
   );
@@ -22,6 +29,7 @@ const Form = ({ name, price, points }: TPlanForm) => {
     handleSubmit,
   } = useForm<TPlanForm>();
   const setPlan = api.plan.post.useMutation();
+  const updatePlan = api.plan.update.useMutation();
 
   const handlePointDelete = (i: number) => {
     if (i > points.length - 1) {
@@ -32,6 +40,14 @@ const Form = ({ name, price, points }: TPlanForm) => {
 
   const handleFormSubmit = (formData: TPlanForm) => {
     console.log(formData);
+    if (id !== -1) {
+      updatePlan.mutate({
+        ...formData,
+        price: Number(formData.price),
+        id: id,
+      });
+      return;
+    }
     setPlan.mutate({
       ...formData,
       price: Number(formData.price),
