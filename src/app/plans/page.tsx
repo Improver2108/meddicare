@@ -7,7 +7,10 @@ const Plans = async () => {
       <h1 className="text-2xl font-semibold">Plans</h1>
       <section className="grid h-full w-full grid-cols-1 gap-5 py-10 text-center">
         {plans.map((plan, index) => (
-          <article className="cursor-pointer shadow-lg transition-transform duration-500 [transform-style:preserve-3d] hover:transition-transform hover:[transform:rotateY(180deg)]">
+          <article
+            key={index}
+            className="cursor-pointer shadow-lg transition-transform duration-500 [transform-style:preserve-3d] hover:transition-transform hover:[transform:rotateY(180deg)]"
+          >
             <div className="absolute flex h-full w-full flex-col items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#9dcfd3] to-[#629ea7] [backface-visibility:hidden]">
               <h1 className="text-xl font-semibold">{plan.name}</h1>
               <p className="text-sm">{plan.price}</p>
@@ -16,7 +19,9 @@ const Plans = async () => {
             <div className="absolute flex h-full w-full flex-col items-center justify-center rounded-xl bg-gradient-to-r from-[#9dcfd3] to-[#629ea7] [backface-visibility:hidden] [transform:rotateY(180deg)]">
               <ul>
                 {plan.points.map((point, index) => (
-                  <li className="text-sm">{point}</li>
+                  <li key={index} className="text-sm">
+                    {point}
+                  </li>
                 ))}
               </ul>
             </div>
