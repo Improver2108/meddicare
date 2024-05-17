@@ -19,7 +19,7 @@ const Page = async () => {
           <h3>{plan.name}</h3>
           {plan.price !== -1 && <h4>{`Rs ${plan.price}`}</h4>}
           <ul>
-            {plan.content.map((point, i) => (
+            {plan.points.map((point, i) => (
               <li key={i}>{point}</li>
             ))}
           </ul>
@@ -31,7 +31,7 @@ const Page = async () => {
                   data: JSON.stringify({
                     name: plan.name,
                     price: plan.price,
-                    points: plan.content,
+                    points: plan.points,
                   }),
                 },
               }}
