@@ -46,7 +46,7 @@ const Page = () => {
   };
 
   return (
-    <>
+    <section className="flex flex-col items-center gap-2 p-4">
       <h1 className="text-xl">Home Page Settings</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -93,7 +93,7 @@ const Page = () => {
         height={100}
         alt="image"
       />
-    </>
+    </section>
   );
 };
 

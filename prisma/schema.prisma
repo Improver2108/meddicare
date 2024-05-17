@@ -42,7 +42,7 @@ model Plan {
 model Contact {
     id       Int    @id @default(autoincrement())
     location String
-    contact  String
+    phone    String
     email    String
 }
 
