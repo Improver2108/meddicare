@@ -23,9 +23,7 @@ const Blog = ({ params }: { params: { id: string } }) => {
         alt="blog image"
       />
       <div>
-        <h1 className="text-6xl font-extrabold">
-          It happened on Medium: March roundup
-        </h1>
+        <h1 className="text-6xl font-extrabold">{data?.name}</h1>
         <h4>{data?.highlight}</h4>
       </div>
 

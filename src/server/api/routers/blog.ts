@@ -29,6 +29,18 @@ export const BlogRouter = createTRPCRouter({
         },
       }),
   ),
+  getLimitedList: publicProcedure.query(
+    async () =>
+      await db.blog.findMany({
+        take: 5,
+        select: {
+          id: true,
+          name: true,
+          image: true,
+          highlight: true,
+        },
+      }),
+  ),
   getContent: publicProcedure.input(id).query(
     async ({ input: id }) =>
       await db.blog.findUnique({
