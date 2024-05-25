@@ -15,7 +15,7 @@ const Blogs = async () => {
         <BlogCarousal arrLength={arrLength} delay={delay}>
           {get5Blogs.map((blog, index) => (
             <BlogCard
-              bg={bg[index] || ""}
+              bg={bg[index] ?? ""}
               index={index}
               key={index}
               id={blog.id}
